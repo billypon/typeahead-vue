@@ -93,10 +93,6 @@ export default {
     }
   },
 
-  mounted () {
-    !this.isValueEmpty ? this.setInputWidth() : 0
-  },
-
   methods: {
     /**
     * Toggle the visibility of the dropdown menu.
@@ -127,7 +123,6 @@ export default {
         index === -1 ? value.push(option) : value.splice(index, 1)
       }
       this.applyValue(value)
-      this.setInputWidth()
     },
 
     /*
@@ -175,6 +170,8 @@ export default {
     },
 
     inputKeyDelete (event) {
+      if (event.keyCode !== 8) return
+
       let active = true
 
       if (!this.model) {
@@ -183,7 +180,6 @@ export default {
           let value = this.value
           !this.multiple ? value = null : value.pop()
           this.applyValue(value)
-          this.setInputWidth()
         }
       }
 
@@ -193,7 +189,7 @@ export default {
 
     setInputWidth () {
       this.$refs.input.style.width = '50px'
-      window.setTimeout(() => {
+      setTimeout(() => {
         this.$refs.input.style.width = this.$el.clientWidth - getPropertyValueSum(this.$el, 'padding-right') - this.$refs.input.offsetLeft - 1 + 'px' // -1用于修正text小数宽度
       }, 1)
     },
@@ -238,6 +234,16 @@ export default {
       return this.options.filter(function (option) {
         return filter(option, model)
       })
+    }
+  },
+
+  mounted () {
+    this.setInputWidth()
+  },
+
+  watch: {
+    value () {
+      this.setInputWidth()
     }
   }
 }

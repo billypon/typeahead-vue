@@ -25,6 +25,9 @@ export default {
         { label: 'Lawrence Edward Page', value: 5 }
       ]
     }
+  },
+  created () {
+    this.value = this.options[0]
   }
 }
 </script>
