@@ -1,0 +1,111 @@
+input-height($height)
+  return $height - 8
+
+tag-height($height)
+  return $height - 12
+
+indicator-margin($height)
+  return tag-height($height) / 2
+
+.v-typeahead
+  height auto
+  padding-left ($padding-base-horizontal - $typeahead-tag-space)
+  padding-right ($padding-base-horizontal + $typeahead-tag-space - 1) // -1: fix decimal width of input
+
+  &:after
+    content ""
+    clear both
+    display table
+
+  &.open
+
+    .v-typeahead-indicator
+      transform rotate(180deg)
+
+    .v-typeahead-dropdown
+      visibility visible
+
+  &.input-lg
+    padding-left ($padding-large-horizontal - $typeahead-tag-space)
+    padding-right ($padding-large-horizontal + $typeahead-tag-space - 1)
+
+    .v-typeahead-indicator
+      margin indicator-margin($input-height-large) ($padding-large-horizontal * -1) 0 0
+
+    .v-typeahead-input
+      height input-height($input-height-large)
+
+    .v-typeahead-tag
+      font-size 14px
+      line-height tag-height($input-height-large)
+      border-radius 10px
+
+    .v-typeahead-dropdown li
+      $padding-large-horizontal
+
+.v-typeahead-indicator
+  float right
+  margin indicator-margin($input-height-base) ($padding-base-horizontal * -1) 0 0
+  transition transform .3s
+
+.v-typeahead-input
+  float left
+  width s("calc(100% - %s)", $typeahead-tag-space)
+  height input-height($input-height-base)
+  border 0
+  padding 0
+  font-size inherit
+  line-height inherit
+  margin-left $typeahead-tag-space
+  cursor default
+
+  &::-ms-clear
+    display none
+
+.v-typeahead-text
+  float left
+  margin 0 ($typeahead-tag-space / -2) 0 $typeahead-tag-space
+
+.v-typeahead-tag
+  float left
+  font-size 12px
+  line-height tag-height($input-height-base)
+  padding 0 10px
+  margin 2px 0 2px $typeahead-tag-space
+  border-radius 8px
+  background $typeahead-tag-bg
+  vertical-align top
+
+.v-typeahead-tag-remove
+  color $typeahead-tag-remove-color
+  float right
+  margin-left 5px
+  cursor pointer
+  font-weight bold
+  font-size 14px
+
+  &:hover
+    color $typeahead-tag-remove-hover
+
+.v-typeahead-dropdown
+  min-width 100%
+  min-height 24px
+  padding 0
+  overflow auto
+  display block
+  visibility hidden
+
+  li
+    padding 0 $padding-base-horizontal
+    line-height 24px
+
+    &.active
+      color $typeahead-list-item-active-color
+      background $typeahead-list-item-active-bg
+
+    &.hover
+      color $typeahead-list-item-hover-color
+      background $typeahead-list-item-hover-bg
+
+    &.empty
+      color $typeahead-list-item-empty-color

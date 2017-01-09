@@ -1,0 +1,24 @@
+$brand-primary ?=       darken(#428bca, 6.5)
+
+$padding-base-vertical ?=    6px
+$padding-base-horizontal ?=  12px
+$padding-large-vertical ?=   10px
+$padding-large-horizontal ?= 16px
+
+$font-size-base ?=         14px
+$font-size-large ?=        ceil($font-size-base * 1.25)
+$line-height-base ?=       1.428571429
+$line-height-large ?=        1.3333333
+$line-height-computed ?=   floor($font-size-base * $line-height-base)
+$input-height-base ?=              ($line-height-computed + ($padding-base-vertical * 2) + 2)
+$input-height-large ?=             (ceil($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2)
+
+$typeahead-tag-bg                 ?= #dae3e5
+$typeahead-tag-space              ?= 10px
+$typeahead-tag-remove-color       ?= #7786ab
+$typeahead-tag-remove-hover       ?= $brand-primary
+$typeahead-list-item-active-color ?= $brand-primary
+$typeahead-list-item-active-bg    ?= #eff4f5
+$typeahead-list-item-hover-color  ?= #fff
+$typeahead-list-item-hover-bg     ?= $brand-primary
+$typeahead-list-item-empty-color  ?= #b5bdbf
