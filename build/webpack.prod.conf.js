@@ -11,7 +11,9 @@ base.entry = {
 base.output = {
   path: config.build.assetsRoot,
   publicPath: config.build.assetsPublicPath,
-  filename: '[name].js'
+  filename: '[name].js',
+  library: 'VueTypeahead',
+  libraryTarget: 'umd'
 }
 
 var webpackConfig = Object.assign({}, base)
