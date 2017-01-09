@@ -93,6 +93,10 @@ export default {
     }
   },
 
+  mounted () {
+    !this.isValueEmpty ? this.setInputWidth() : 0
+  },
+
   methods: {
     /**
     * Toggle the visibility of the dropdown menu.
