@@ -7,7 +7,7 @@
     | {{ getOptionLabel(option) }}
   input.v-typeahead-input(ref="input"
     v-model="model"
-    ,:placeholder="isValueEmpty ? '' : placeholder"
+    ,:placeholder="isValueEmpty ? placeholder : ''"
     @blur="active = false"
     @keyup.up="inputKeyUp"
     @keyup.down="inputKeyDown"

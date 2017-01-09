@@ -219,7 +219,7 @@ export default {
     * @return {Boolean}
     */
     isValueEmpty () {
-      return !this.multiple ? this.value : this.value && this.value.length
+      return !this.multiple ? !this.value : !this.value || !this.value.length
     },
 
     /*
