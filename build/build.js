@@ -34,7 +34,6 @@ webpack(webpackConfig, function (err, stats) {
     .set('filename', 'src/typeahead.styl')
     .set('compress', true)
     .set('sourcemap', true)
-    .import('variables.styl')
   stylus.render(function (err, data) {
     if (err) {
       console.error(err.toString())
