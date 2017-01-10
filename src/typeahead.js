@@ -39,6 +39,11 @@ export default {
     multiple: Boolean,
 
     /*
+    * Equivalent to the `disabled` attribute on a `<select>` input.
+    */
+    disabled: Boolean,
+
+    /*
     * Equivalent to the `placeholder` attribute on an `<input>`.
     */
     placeholder: {
@@ -101,7 +106,7 @@ export default {
     toggleDropdown (event) {
       let target = event.target
       let tag = target.tagName.toLowerCase()
-      if (tag === 'li') {
+      if (this.disabled || tag === 'li') {
         return
       }
       this.current = -1

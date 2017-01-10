@@ -1,5 +1,5 @@
 <template lang="pug">
-.v-typeahead.form-control.dropdown(:class="{open: active, focus: focus}" @click="toggleDropdown")
+.v-typeahead.form-control.dropdown(:class="{open: active, focus: focus, disabled: disabled}" @click="toggleDropdown")
   .v-typeahead-indicator.caret
   .v-typeahead-text(v-if="!multiple && value") {{ getOptionLabel(value) }}
   .v-typeahead-tag(v-if="multiple" v-for="option in value")

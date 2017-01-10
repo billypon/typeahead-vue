@@ -7,7 +7,7 @@
 
   div
     h1 multiple test:
-    v-typeahead(v-model="values", :options="options", :multiple="true")
+    v-typeahead(v-model="values", :options="options" multiple)
     div {{ values }}
 </template>
 
