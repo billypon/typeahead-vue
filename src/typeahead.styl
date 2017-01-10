@@ -12,7 +12,8 @@ indicator-margin($height)
 .v-typeahead
   height auto
   padding-left ($padding-base-horizontal - $typeahead-tag-space)
-  padding-right ($padding-base-horizontal + $typeahead-tag-space - 1) // -1: fix decimal width of input
+  padding-right ($padding-base-horizontal + $typeahead-tag-space - 1) // -1: fix decimal width of text
+  position relative
 
   &:after
     content ""
@@ -55,7 +56,7 @@ indicator-margin($height)
 
 .v-typeahead-input
   float left
-  width s("calc(100% - %s)", $typeahead-tag-space)
+  width 50px // minimum width
   height input-height($input-height-base)
   border 0
   padding 0
@@ -115,3 +116,11 @@ indicator-margin($height)
 
     &.empty
       color $typeahead-list-item-empty-color
+
+.v-typeahead-tester
+  position absolute
+  width 100%
+  height 0
+  z-index -1
+  left 0
+  border 0

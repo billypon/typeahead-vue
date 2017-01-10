@@ -18,6 +18,7 @@
     li(v-for="(option, index) in filteredOptions", :class="{active: isOptionSelected(option), hover: index === current}" @mousedown.prevent="toggleOption(option)" @mouseover="current = index") {{ getOptionLabel(option) }}
     li.no-option(v-if="!filteredOptions.length")
       slot(name="no-options") no matching options
+  iframe.v-typeahead-tester(ref="tester")
 </template>
 
 <script>

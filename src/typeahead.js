@@ -188,10 +188,7 @@ export default {
     },
 
     setInputWidth () {
-      this.$refs.input.style.width = '50px'
-      setTimeout(() => {
-        this.$refs.input.style.width = this.$el.clientWidth - getPropertyValueSum(this.$el, 'padding-right') - this.$refs.input.offsetLeft - 1 + 'px' // -1用于修正text小数宽度
-      }, 1)
+      this.$refs.input.style.width = this.$el.clientWidth - getPropertyValueSum(this.$el, 'padding-right') - this.$refs.input.offsetLeft - 1 + 'px' // -1用于修正text小数宽度
     },
 
     setListFocus () {
@@ -238,12 +235,27 @@ export default {
   },
 
   mounted () {
+    let timeout
+    let width
+    this.$refs.tester.contentWindow.addEventListener('resize', () => {
+      // event will be fired immediatly
+      if (width === this.$refs.tester.clientWidth) return
+      width = this.$refs.tester.clientWidth
+      clearTimeout(timeout)
+      this.$refs.input.style.width = ''
+      timeout = setTimeout(() => {
+        this.setInputWidth()
+      }, 100)
+    })
+  },
+
+  updated () {
     this.setInputWidth()
   },
 
   watch: {
     value () {
-      this.setInputWidth()
+      this.$refs.input.style.width = '' // reset to minimum width
     }
   }
 }
