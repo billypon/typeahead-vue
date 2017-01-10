@@ -1,5 +1,5 @@
 <template lang="pug">
-.v-typeahead.form-control.dropdown(:class="{open: active, multiple: multiple}" @click="toggleDropdown")
+.v-typeahead.form-control.dropdown(:class="{open: active, focus: focus}" @click="toggleDropdown")
   .v-typeahead-indicator.caret
   .v-typeahead-text(v-if="!multiple && value") {{ getOptionLabel(value) }}
   .v-typeahead-tag(v-if="multiple" v-for="option in value")
@@ -8,7 +8,8 @@
   input.v-typeahead-input(ref="input"
     v-model="model"
     ,:placeholder="isValueEmpty ? placeholder : ''"
-    @blur="active = false"
+    @focus="focus = true"
+    @blur="active = false; focus = false"
     @keyup.up="inputKeyUp"
     @keyup.down="inputKeyDown"
     @keyup.enter="inputKeyEnter"

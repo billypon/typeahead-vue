@@ -15,11 +15,6 @@ indicator-margin($height)
   padding-right ($padding-base-horizontal + $typeahead-tag-space - 1) // -1: fix decimal width of text
   position relative
 
-  &:after
-    content ""
-    clear both
-    display table
-
   &.open
 
     .v-typeahead-indicator
@@ -28,7 +23,18 @@ indicator-margin($height)
     .v-typeahead-dropdown
       visibility visible
 
-  &.input-lg
+  &.focus
+    $color = $input-border-focus
+    $color-rgba = rgba(red($color), green($color), blue($color), .6)
+    border-color $color
+    box-shadow inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px $color-rgba
+
+  &:after
+    content ""
+    clear both
+    display table
+
+  .form-lg &, &.input-lg
     padding-left ($padding-large-horizontal - $typeahead-tag-space)
     padding-right ($padding-large-horizontal + $typeahead-tag-space - 1)
 
@@ -64,6 +70,9 @@ indicator-margin($height)
   line-height inherit
   margin-left $typeahead-tag-space
   cursor default
+
+  &:focus
+    outline none
 
   &::-ms-clear
     display none

@@ -87,6 +87,7 @@ export default {
   data () {
     return {
       active: false,
+      focus: false,
       model: '',
       current: -1,
       oldModel: ''
