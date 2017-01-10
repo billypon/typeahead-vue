@@ -15,7 +15,7 @@
     @keyup.enter="inputKeyEnter"
     @keyup.esc="inputKeyEsc"
     @keyup.delete="inputKeyDelete")
-  ul.v-typeahead-dropdown.dropdown-menu(:style="{'max-height': maxItem > 0 ? maxItem * 24 + 'px' : 'none'}" ref="list")
+  ul.v-typeahead-dropdown.dropdown-menu(:style="{'max-height': limit > 0 ? limit * 24 + 'px' : 'none'}" ref="list")
     li(v-for="(option, index) in filteredOptions", :class="{active: isOptionSelected(option), hover: index === current}" @mousedown.prevent="toggleOption(option)" @mouseover="current = index") {{ getOptionLabel(option) }}
     li.no-option(v-if="!filteredOptions.length")
       slot(name="no-options") no matching options

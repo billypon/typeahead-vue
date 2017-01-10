@@ -58,7 +58,7 @@ export default {
     /*
     * Tells vue-typeahead how many dropdown items to show.
     */
-    maxItem: {
+    limit: {
       type: Number,
       default: 10
     },
@@ -193,7 +193,7 @@ export default {
     },
 
     setListFocus () {
-      if (!(this.maxItem > 0 && this.filteredOptions.length > this.maxItem)) return
+      if (!(this.limit > 0 && this.filteredOptions.length > this.limit)) return
 
       let unit = 24
       let list = this.$refs.list
@@ -201,7 +201,7 @@ export default {
       let scrollTop = this.current * unit
       list.scrollTop > scrollTop ? list.scrollTop = scrollTop : 0
 
-      scrollTop = Math.max((this.current + 1 - this.maxItem) * unit, 0)
+      scrollTop = Math.max((this.current + 1 - this.limit) * unit, 0)
       list.scrollTop < scrollTop ? list.scrollTop = scrollTop : 0
     },
 
