@@ -1,13 +1,5 @@
 @import "variables"
-
-input-height($height)
-  return $height - 8
-
-tag-height($height)
-  return $height - 12
-
-indicator-margin($height)
-  return tag-height($height) / 2
+@import $typeahead-mixins
 
 .v-typeahead
   height auto
@@ -25,10 +17,7 @@ indicator-margin($height)
       visibility visible
 
   &.focus
-    $color = $input-border-focus
-    $color-rgba = rgba(red($color), green($color), blue($color), .6)
-    border-color $color
-    box-shadow inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px $color-rgba
+    typeahead-focus($input-border-focus)
 
   &.disabled
     background-color $input-bg-disabled
@@ -47,22 +36,31 @@ indicator-margin($height)
     padding-right ($padding-large-horizontal + $typeahead-tag-space - 1)
 
     .v-typeahead-input, .v-typeahead-holder
-      line-height input-height($input-height-large)
+      line-height typeahead-input-height($input-height-large)
 
     .v-typeahead-tag
       font-size 14px
-      line-height tag-height($input-height-large)
+      line-height typeahead-tag-height($input-height-large)
       border-radius 10px
 
     .v-typeahead-indicator
-      margin indicator-margin($input-height-large) ($padding-large-horizontal * -1) 0 0
+      margin typeahead-indicator-margin($input-height-large) ($padding-large-horizontal * -1) 0 0
 
     .v-typeahead-dropdown li
       $padding-large-horizontal
 
+  .has-success &.focus
+    typeahead-validation-focus($state-success-text)
+
+  .has-warning &.focus
+    typeahead-validation-focus($state-warning-text)
+
+  .has-error &.focus
+    typeahead-validation-focus($state-danger-text)
+
 .v-typeahead-input, .v-typeahead-holder
   max-width s("calc(100% - %s)", $typeahead-tag-space * 2)
-  line-height input-height($input-height-base)
+  line-height typeahead-input-height($input-height-base)
   margin-left $typeahead-tag-space
 
 .v-typeahead-input
@@ -93,7 +91,7 @@ indicator-margin($height)
 .v-typeahead-tag
   float left
   font-size 12px
-  line-height tag-height($input-height-base)
+  line-height typeahead-tag-height($input-height-base)
   padding 0 10px
   margin 2px 0 2px $typeahead-tag-space
   border-radius 8px
@@ -113,7 +111,7 @@ indicator-margin($height)
 
 .v-typeahead-indicator
   float right
-  margin indicator-margin($input-height-base) ($padding-base-horizontal * -1) 0 0
+  margin typeahead-indicator-margin($input-height-base) ($padding-base-horizontal * -1) 0 0
   transition transform .3s
 
 .v-typeahead-dropdown

@@ -1,0 +1,16 @@
+typeahead-input-height($height)
+  return $height - 8
+
+typeahead-tag-height($height)
+  return $height - 12
+
+typeahead-indicator-margin($height)
+  return typeahead-tag-height($height) / 2
+
+typeahead-focus($color)
+  border-color $color
+  box-shadow inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(red($color), green($color), blue($color), .6)
+
+typeahead-validation-focus($color)
+  border-color darken($color, 10)
+  box-shadow inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px lighten($color, 20)
