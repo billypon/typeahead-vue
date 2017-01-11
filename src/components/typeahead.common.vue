@@ -6,7 +6,7 @@
     span.v-typeahead-tag-remove(@click="toggleOption(option)" no-toggle) &times;
     | {{ getOptionLabel(option) }}
   .v-typeahead-input(contenteditable
-    @input="model = $event.target.textContent"
+    @input="model = $event.target.textContent; loadAsyncOptions()"
     @focus="focus = true"
     @blur="focus = active = false; clearInput()"
     @keydown.up.prevent="onInputUp"
@@ -20,8 +20,16 @@
   )
   ul.v-typeahead-dropdown.dropdown-menu(:style="{'max-height': limit > 0 ? limit * 24 + 'px' : 'none'}" ref="list")
     li(v-for="(option, index) in filteredOptions", :class="{active: isOptionSelected(option), hover: index === current}" @click="toggleOption(option)" @mouseover="current = index" no-toggle) {{ getOptionLabel(option) }}
-    li.no-option(v-if="!filteredOptions.length")
+    li.no-option(v-if="!loading && !filteredOptions.length")
       slot(name="no-options") no matching options
+    li.async-error(v-if="error")
+      slot(name="async-error") load options failure
+    li(v-if="loading")
+      slot(name="loading")
+        .v-typeahead-loading
+          span.dot
+          span.dot
+          span.dot
 </template>
 
 <script>

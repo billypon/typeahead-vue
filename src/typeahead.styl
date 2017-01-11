@@ -136,3 +136,36 @@
 
     &.empty
       color $typeahead-list-item-empty-color
+
+.v-typeahead-loading
+  $size = 2px
+  $space = 3px
+
+  display inline-block
+  width ($size + $space) * 3
+  overflow hidden
+  animation v-typeahead-loading 1s infinite
+  vertical-align bottom
+  white-space nowrap
+
+  .dot
+    display inline-block
+    width $size
+    height $size
+    border-radius 50%
+    background currentColor
+    margin-right $space
+
+@keyframes v-typeahead-loading
+  0%
+    width 0
+    margin-right 15px
+  33%
+    width 5px
+    margin-right 10px
+  66%
+    width 10px
+    margin-right 5px
+  100%
+    width 15px
+    margin-right 0

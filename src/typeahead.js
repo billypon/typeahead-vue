@@ -24,6 +24,8 @@ export default {
       }
     },
 
+    loadOptions: Function,
+
     //
     // Equivalent to the `multiple` attribute on a `<select>` input.
     //
@@ -67,6 +69,7 @@ export default {
     //
     // An optional callback function that is called when filtering options.
     // @param option
+    //
     // @return {Boolean}
     //
     filter: Function,
@@ -75,6 +78,7 @@ export default {
     // Callback to generate the label text. If {option}
     // is an object, returns option[this.label] by default.
     // @param option
+    //
     // @return {String}
     //
     getOptionLabel: {
@@ -90,7 +94,10 @@ export default {
       active: false,
       focus: false,
       model: '',
-      current: -1
+      current: -1,
+      asyncOptions: null,
+      loading: false,
+      error: null
     }
   },
 
@@ -103,9 +110,11 @@ export default {
         return
       }
       this.active = !this.active
-      this.current = -1
-      this.$refs.list.scrollTop = 0
-      this.active ? this.$refs.input.focus() : 0
+      this.resetList()
+      if (this.active) {
+        this.$refs.input.focus()
+        this.loadAsyncOptions(true)
+      }
     },
 
     //
@@ -124,6 +133,21 @@ export default {
       this.applyValue(value)
     },
 
+    async loadAsyncOptions (skip) {
+      if (!this.loadOptions || skip && this.asyncOptions) return
+      this.asyncOptions = null
+      this.resetList()
+      this.loading = true
+      this.error = null
+      try {
+        this.asyncOptions = await this.loadOptions(this.model)
+      } catch (err) {
+        this.error = err
+        console.error('[v-typeahead]', 'async options error', err)
+      }
+      this.loading = false
+    },
+
     //
     // Check if the given option is currently selected.
     //
@@ -136,6 +160,11 @@ export default {
 
     clearInput () {
       this.model = this.$refs.input.textContent = ''
+    },
+
+    resetList () {
+      this.current = -1
+      this.$refs.list.scrollTop = 0
     },
 
     onInputUp (event) {
@@ -239,10 +268,8 @@ export default {
     // @return {array}
     //
     filteredOptions () {
-      let model = this.model
-      let filter = this.filter ? this.filter : option => option[this.label].indexOf(model) !== -1
-      return this.options.filter(function (option) {
-        return filter(option, model)
+      return this.asyncOptions || this.options.filter((option) => {
+        return this.filter ? this.filter(option, this.model) : !this.model ? true : this.getOptionLabel(option).indexOf(this.model) !== -1
       })
     }
   }
