@@ -46,13 +46,7 @@ indicator-margin($height)
     padding-left ($padding-large-horizontal - $typeahead-tag-space)
     padding-right ($padding-large-horizontal + $typeahead-tag-space - 1)
 
-    .v-typeahead-indicator
-      margin indicator-margin($input-height-large) ($padding-large-horizontal * -1) 0 0
-
-    .v-typeahead-input
-      height input-height($input-height-large)
-
-    .v-typeahead-text
+    .v-typeahead-input, .v-typeahead-holder
       line-height input-height($input-height-large)
 
     .v-typeahead-tag
@@ -60,24 +54,27 @@ indicator-margin($height)
       line-height tag-height($input-height-large)
       border-radius 10px
 
+    .v-typeahead-indicator
+      margin indicator-margin($input-height-large) ($padding-large-horizontal * -1) 0 0
+
     .v-typeahead-dropdown li
       $padding-large-horizontal
 
-.v-typeahead-indicator
-  float right
-  margin indicator-margin($input-height-base) ($padding-base-horizontal * -1) 0 0
-  transition transform .3s
+.v-typeahead-input, .v-typeahead-holder
+  max-width s("calc(100% - %s)", $typeahead-tag-space * 2)
+  line-height input-height($input-height-base)
+  margin-left $typeahead-tag-space
 
 .v-typeahead-input
   float left
-  width 50px // minimum width
-  height input-height($input-height-base)
+  min-width 1px
   border 0
   padding 0
   font-size inherit
-  line-height inherit
-  margin-left $typeahead-tag-space
+  white-space nowrap
+  overflow hidden
   cursor inherit
+  position relative
 
   &:focus
     outline none
@@ -85,10 +82,13 @@ indicator-margin($height)
   &::-ms-clear
     display none
 
-.v-typeahead-text
-  float left
-  line-height input-height($input-height-base)
-  margin 0 ($typeahead-tag-space / -2) 0 $typeahead-tag-space
+.v-typeahead-holder
+  position absolute
+  color $input-color-placeholder
+  overflow hidden
+
+  &.highlight
+    color inherit
 
 .v-typeahead-tag
   float left
@@ -110,6 +110,11 @@ indicator-margin($height)
 
   &:hover
     color $typeahead-tag-remove-hover
+
+.v-typeahead-indicator
+  float right
+  margin indicator-margin($input-height-base) ($padding-base-horizontal * -1) 0 0
+  transition transform .3s
 
 .v-typeahead-dropdown
   min-width 100%
@@ -133,11 +138,3 @@ indicator-margin($height)
 
     &.empty
       color $typeahead-list-item-empty-color
-
-.v-typeahead-tester
-  position absolute
-  width 100%
-  height 0
-  z-index -1
-  left 0
-  border 0
