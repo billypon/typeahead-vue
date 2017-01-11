@@ -1,6 +1,6 @@
 {
   "name": "vue-typeahead",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A vue typeahead component",
   "author": "billypon <billypon@gmail.com>",
   "main": "dist/vue-typeahead.js",
