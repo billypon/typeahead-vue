@@ -7,8 +7,8 @@
     | {{ getOptionLabel(option) }}
   .v-typeahead-input(contenteditable
     @input="model = $event.target.textContent; loadAsyncOptions()"
-    @focus="focus = true"
-    @blur="focus = active = false; clearInput()"
+    @focus="focus = true; emit('focus')"
+    @blur="focus = active = false; clearInput(); emit('blur')"
     @keydown.up.prevent="onInputUp"
     @keydown.down.prevent="onInputDown"
     @keydown.enter.prevent="onInputEnter"

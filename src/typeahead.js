@@ -248,6 +248,10 @@ export default {
 
     applyValue (value) {
       this.$emit('input', value)
+    },
+
+    emit (event) {
+      this.$emit(event)
     }
   },
 
