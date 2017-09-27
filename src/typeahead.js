@@ -13,7 +13,7 @@ export default {
 
     //
     // An array of strings or objects to be used as dropdown choices.
-    // If you are using an array of objects, vue-typeahead will look for
+    // If you are using an array of objects, typeahead-vue will look for
     // a `label` key (ex. [{label: 'This is Foo', value: 'foo'}]). A
     // custom label key can be set with the `label` prop.
     //
@@ -50,7 +50,7 @@ export default {
     disableEnter: Boolean,
 
     //
-    // Tells vue-typeahead what key to use when generating option
+    // Tells typeahead-vue what key to use when generating option
     // labels when each `option` is an object.
     //
     label: {
@@ -59,7 +59,7 @@ export default {
     },
 
     //
-    // Tells vue-typeahead how many dropdown items to show.
+    // Tells typeahead-vue how many dropdown items to show.
     //
     limit: {
       type: Number,

@@ -3,7 +3,7 @@
   "version": "1.0.9",
   "description": "A vue typeahead component",
   "author": "billypon <billypon@gmail.com>",
-  "main": "dist/vue-typeahead.js",
+  "main": "dist/typeahead-vue.js",
   "scripts": {
     "start": "node build/dev-server.js",
     "build": "node build/build.js"

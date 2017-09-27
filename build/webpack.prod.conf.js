@@ -3,9 +3,9 @@ const base = require('./webpack.base.conf')
 const config = require('../config')
 
 base.entry = {
-  'vue-typeahead': './src/index.js',
-  'vue-typeahead.common': './src/index.common.js',
-  'vue-typeahead.base': './src/index.base.js'
+  'typeahead-vue': './src/index.js',
+  'typeahead-vue.common': './src/index.common.js',
+  'typeahead-vue.base': './src/index.base.js'
 }
 
 base.output = {
