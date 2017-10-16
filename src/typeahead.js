@@ -125,11 +125,12 @@ export default {
     // Toggle a given option.
     //
     toggleOption (option) {
-      let value = this.value
+      let value
       if (!this.multiple) {
         value = option
         this.$refs.input.blur()
       } else {
+        value = this.checkedValue
         let index = value.indexOf(option)
         index === -1 ? value.push(option) : value.splice(index, 1)
         this.clearInput()
@@ -159,7 +160,7 @@ export default {
     // @return {Boolean}
     //
     isOptionSelected (option) {
-      return !this.multiple ? this.value === option : this.value && this.value.indexOf(option) !== -1
+      return !this.multiple ? this.value === option : this.checkedValue.indexOf(option) !== -1
     },
 
     clearInput () {
@@ -210,7 +211,7 @@ export default {
 
     onInputDelete (event) {
       if (!this.model && !this.oldModel && event.keyCode === 8) {
-        let value = this.value
+        let value = this.checkedValue
         !this.multiple ? value = null : value.pop()
         this.applyValue(value)
       }
@@ -272,13 +273,17 @@ export default {
   },
 
   computed: {
+    checkedValue () {
+      return this.value || []
+    },
+
     //
     // Check if there aren't any options selected.
     //
     // @return {Boolean}
     //
     isValueEmpty () {
-      return !this.multiple ? !this.value : !this.value || !this.value.length
+      return !this.multiple ? !this.value : !this.checkedValue.length
     },
 
     //

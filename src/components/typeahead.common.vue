@@ -2,7 +2,7 @@
 .v-typeahead.form-control.dropdown(:class="{open: active, focus: focus, disabled: disabled}" @click="toggleDropdown" @mousedown.prevent="")
   .v-typeahead-indicator.caret
   .v-typeahead-holder(:class="{highlight: !focus && !isValueEmpty}" v-show="!focus || !model") {{ isValueEmpty ? placeholder : !multiple && value ? getOptionLabel(value) : '' }}
-  .v-typeahead-tag(v-if="multiple" v-for="option in value")
+  .v-typeahead-tag(v-if="multiple" v-for="option in checkedValue")
     span.v-typeahead-tag-remove(@click="toggleOption(option)" no-toggle) &times;
     | {{ getOptionLabel(option) }}
   .v-typeahead-input(contenteditable
