@@ -24,6 +24,8 @@ export default {
       }
     },
 
+    loadCache: Boolean,
+
     loadOptions: Function,
 
     //
@@ -133,8 +135,8 @@ export default {
       this.applyValue(value)
     },
 
-    async loadAsyncOptions (skip) {
-      if (!this.loadOptions || skip && this.asyncOptions) return
+    async loadAsyncOptions () {
+      if (!this.loadOptions || this.loadCache && this.asyncOptions) return
       this.asyncOptions = null
       this.resetList()
       this.loading = true
