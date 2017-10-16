@@ -19,7 +19,7 @@
     ref="input"
   )
   ul.v-typeahead-dropdown.dropdown-menu(:style="{'max-height': limit > 0 ? limit * 24 + 'px' : 'none'}" ref="list")
-    li(v-for="(option, index) in filteredOptions", :class="{active: isOptionSelected(option), hover: index === current, group: option.GROUP, option: option.OPTION}" @click="toggleOption(option)" @mouseover="!option.GROUP ? current = index : ''" no-toggle) {{ getOptionLabel(option) }}
+    li(v-for="(option, index) in filteredOptions", :class="{active: isOptionSelected(option), hover: index === current, group: option.GROUP, option: option.OPTION}" @click="!option.GROUP && toggleOption(option)" @mouseover="!option.GROUP && (current = index)" no-toggle) {{ getOptionLabel(option) }}
     li.no-option(v-if="!loading && !filteredOptions.length")
       slot(name="no-options") no matching options
     li.async-error(v-if="error")
