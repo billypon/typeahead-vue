@@ -2,7 +2,7 @@
 #app
   div
     h1 single test:
-    v-typeahead(v-model="value", :options="options")
+    v-typeahead(v-model="value", :options="options" optionGroup="group")
     div {{ value }}
 
   div
@@ -18,10 +18,9 @@ export default {
       value: null,
       values: [],
       options: [
-        { label: 'I\'m group'},
-        { label: 'Bill Gates', value: 1 },
-        { label: 'Jobs Steve', value: 2 },
-        { label: 'Tim Cook', value: 3 },
+        { label: 'Bill Gates', value: 1, group: 'two words' },
+        { label: 'Jobs Steve', value: 2, group: 'two words' },
+        { label: 'Tim Cook', value: 3, group: 'two words' },
         { label: 'Mark Elliot Zuckerberg', value: 4 },
         { label: 'Lawrence Edward Page', value: 5 }
       ],

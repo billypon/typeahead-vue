@@ -24,6 +24,8 @@ export default {
       }
     },
 
+    optionGroup: String,
+
     loadCache: Boolean,
 
     loadOptions: Function,
@@ -172,7 +174,7 @@ export default {
     onInputUp (event) {
       var current = this.current - 1, max = this.filteredOptions.length - 1
       if (current < 0) current = max
-      if (this.filteredOptions[current].value == undefined) {
+      if (this.filteredOptions[current].GROUP) {
         current--
         if (current < 0) current = max
       }
@@ -183,7 +185,7 @@ export default {
     onInputDown (event) {
       var current = this.current + 1, max = this.filteredOptions.length - 1
       if (current > max) current = 0
-      if (this.filteredOptions[current].value == undefined) {
+      if (this.filteredOptions[current].GROUP) {
         current++
         if (current > max) current = 0
       }
@@ -286,10 +288,32 @@ export default {
     // @return {array}
     //
     filteredOptions () {
-      return this.asyncOptions || this.options.filter((option) => {
+      var options = this.asyncOptions || this.options.filter((option) => {
         return this.filter ? this.filter(option, this.model) : !this.model ? true : this.getOptionLabel(option).indexOf(this.model) !== -1
       })
+      var optionGroup = this.optionGroup
+      if (optionGroup) {
+        var groups = {}
+        options.forEach(function (x) {
+          var group = x[optionGroup]
+          if (group == undefined || group == null) group = ""
+          if (!groups[group]) groups[group] = []
+          groups[group].push(x)
+        })
+        options = []
+        for (var x in groups) {
+          if (!x) continue
+          options.push({label: x, GROUP: true})
+          groups[x].forEach(function (y) { options.push(y) })
+        }
+        if (groups[""]) {
+            groups[""].forEach(function (x) {
+              x.OPTION = true
+              options.push(x)
+            })
+        }
+      }
+      return options
     }
   }
 }
-
