@@ -170,12 +170,24 @@ export default {
     },
 
     onInputUp (event) {
-      this.current = (this.current > 0 ? this.current : this.filteredOptions.length) - 1
+      var current = this.current - 1, max = this.filteredOptions.length - 1
+      if (current < 0) current = max
+      if (this.filteredOptions[current].value == undefined) {
+        current--
+        if (current < 0) current = max
+      }
+      this.current = current
       this.hoverListItem()
     },
 
     onInputDown (event) {
-      this.current = (this.current + 1 < this.filteredOptions.length ? this.current : -1) + 1
+      var current = this.current + 1, max = this.filteredOptions.length - 1
+      if (current > max) current = 0
+      if (this.filteredOptions[current].value == undefined) {
+        current++
+        if (current > max) current = 0
+      }
+      this.current = current
       this.hoverListItem()
     },
 

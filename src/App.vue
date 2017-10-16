@@ -18,6 +18,7 @@ export default {
       value: null,
       values: [],
       options: [
+        { label: 'I\'m group'},
         { label: 'Bill Gates', value: 1 },
         { label: 'Jobs Steve', value: 2 },
         { label: 'Tim Cook', value: 3 },
