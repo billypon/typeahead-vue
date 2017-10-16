@@ -159,7 +159,7 @@ export default {
     // @return {Boolean}
     //
     isOptionSelected (option) {
-      return !this.multiple ? this.value === option : this.value.indexOf(option) !== -1
+      return !this.multiple ? this.value === option : this.value && this.value.indexOf(option) !== -1
     },
 
     clearInput () {
@@ -172,7 +172,7 @@ export default {
     },
 
     onInputUp (event) {
-      var current = this.current - 1, max = this.filteredOptions.length - 1
+      let current = this.current - 1, max = this.filteredOptions.length - 1
       if (current < 0) current = max
       if (this.filteredOptions[current].GROUP) {
         current--
@@ -183,7 +183,7 @@ export default {
     },
 
     onInputDown (event) {
-      var current = this.current + 1, max = this.filteredOptions.length - 1
+      let current = this.current + 1, max = this.filteredOptions.length - 1
       if (current > max) current = 0
       if (this.filteredOptions[current].GROUP) {
         current++
@@ -288,15 +288,15 @@ export default {
     // @return {array}
     //
     filteredOptions () {
-      var options = this.asyncOptions || this.options.filter((option) => {
+      let options = this.asyncOptions || this.options.filter((option) => {
         return this.filter ? this.filter(option, this.model) : !this.model ? true : this.getOptionLabel(option).indexOf(this.model) !== -1
       })
-      var optionGroup = this.optionGroup
+      let optionGroup = this.optionGroup
       if (optionGroup) {
-        var groups = {}
+        let groups = {}
         options.forEach(function (x) {
-          var group = x[optionGroup]
-          if (group == undefined || group == null) group = ""
+          let group = x[optionGroup]
+          if (group === undefined || group === null) group = ""
           if (!groups[group]) groups[group] = []
           groups[group].push(x)
         })
